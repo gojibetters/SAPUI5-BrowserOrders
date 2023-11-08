@@ -6,7 +6,10 @@
     >
     <Page id="page" title="Orders ({/Orders/length})">
         <content>
-            <List id="list" items="{/Orders}" class="sapUiSmallMargin" width="auto">
+        
+            <SearchField liveChange=".onSearch" width="15%" class="sapUiMediumMarginBegin sapUiMediumMarginTop" />
+
+            <List id="ordersList" items="{/Orders}" class="sapUiTinyMarginTop sapUiSmallMarginBeginEnd" width="auto">
                 <ObjectListItem
                     title="Order {OrderID}"
                     highlightText=""
