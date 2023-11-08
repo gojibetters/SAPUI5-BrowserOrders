@@ -1,0 +1,43 @@
+<mvc:View 
+    controllerName="com.lab2dev.browserorders.controller.Orders"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true"
+    >
+    <Page id="page" title="Orders ({/Orders/length})">
+        <content>
+            <List id="list" items="{/Orders}" class="sapUiSmallMargin" width="auto">
+                <ObjectListItem
+                    title="Order {OrderID}"
+                    highlightText=""
+                    type="Active"
+                    number="{
+                       parts:[{
+                        path:'OrderDate',
+                        formatter: '.formatter.formattedOrderDate'
+                        }],
+                       type: 'sap.ui.model.type.Date'
+                    }"
+                    numberUnit="{CurrencyCode}"
+                    >
+                    <firstStatus>
+                        <ObjectStatus
+                            text="{
+                                parts: ['ShippedDate', 'OrderDate'],
+                                formatter: '.formatter.textStatus'
+                            }"
+                            state="{
+                                parts: ['ShippedDate', 'OrderDate'],
+                                formatter: '.formatter.textStatusColor'
+                            }" />
+			        </firstStatus>
+                    <ObjectAttribute text="{ShipName}" />
+                    <ObjectAttribute text="Shipped: {
+                        path: 'ShippedDate',
+                        formatter: '.formatter.formattedShippedDate'
+                        }" />
+                </ObjectListItem>
+            </List>
+        </content>
+    </Page>
+</mvc:View>

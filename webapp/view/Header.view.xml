@@ -1,0 +1,7 @@
+<mvc:View 
+    controllerName="com.lab2dev.browserorders.controller.Header"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m">
+    
+</mvc:View>
