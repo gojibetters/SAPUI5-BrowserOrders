@@ -5,13 +5,13 @@ sap.ui.define([], () => {
 	const MAX_DAYS_FOR_TOO_LATE = 14
 
 	return {
-		formattedShippedDate(date) {
+		formattedDateWithFullYear(date) {
       return new Date(date).toLocaleString('pt-BR', {
 				dateStyle: 'short'
 			})
 		},
 
-		formattedOrderDate(date) {
+		formattedDateWithShortYear(date) {
 			return new Date(date).toLocaleString('pt-BR', {
 				year:'2-digit',
 				month:'2-digit',

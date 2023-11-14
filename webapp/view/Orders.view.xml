@@ -23,7 +23,7 @@
 							number="{
                             parts:[{
                                 path:'orders>OrderDate',
-                                formatter: '.formatter.formattedOrderDate'
+                                formatter: '.formatter.formattedDateWithFullYear'
                                 }],
                             type: 'sap.ui.model.type.Date'
                             }"
@@ -44,7 +44,7 @@
 							<ObjectAttribute
 								text="Shipped: {
                                 path: 'orders>ShippedDate',
-                                formatter: '.formatter.formattedShippedDate'
+                                formatter: '.formatter.formattedDateWithShortYear'
                                 }" />
 						</ObjectListItem>
 					</List>
@@ -91,9 +91,17 @@
 					<f:DynamicPageHeader pinnable="true">
 						<layout:HorizontalLayout allowWrapping="true">
 							<layout:VerticalLayout class="sapUiMediumMarginEnd">
-								<ObjectAttribute title="Customer" text="Warehouse A" />
-								<ObjectAttribute title="Ordered" text="23L" />
-								<ObjectAttribute title="Shipped" text="34" />
+								<ObjectAttribute title="Customer" text="{specificOrder>/ShipName}" />
+								<ObjectAttribute title="Ordered"
+									text="{
+									path: 'specificOrder>/OrderDate',
+									formatter: '.formatter.formattedDateWithFullYear'
+							}" />
+								<ObjectAttribute title="Shipped"
+									text="{
+									path: 'specificOrder>/ShippedDate',
+									formatter: '.formatter.formattedDateWithFullYear'
+									}" />
 							</layout:VerticalLayout>
 
 							<layout:VerticalLayout>

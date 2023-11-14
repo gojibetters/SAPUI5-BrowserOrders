@@ -35,9 +35,6 @@ sap.ui.define([
                 const orderTitle = oEvent.getSource().getProperty('title')
                 const id = orderTitle.replace('Order ', '')
 
-                const that = this
-                debugger
-
                 const oData = models.getODataModel()
 
                 oData.then((oModel) => {
