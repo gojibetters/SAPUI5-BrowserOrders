@@ -21,10 +21,31 @@ sap.ui.define([
                 oData.then((oModel) => {
                     oModel.read("/Orders", {
                         success: (aOrders) => {
-                            const oModel = new JSONModel({
-                                Orders: aOrders.results,
-                            })
-                            this.getView().setModel(oModel)
+                            const oModel = new JSONModel(aOrders.results)
+                            this.getView().setModel(oModel, "orders")
+                        },
+                        error: (sError) => {
+                            console.log(sError)
+                        }
+                    })
+                })
+            },
+
+            onListItemPress: function (oEvent) {
+                const orderTitle = oEvent.getSource().getProperty('title')
+                const id = orderTitle.replace('Order ', '')
+
+                const that = this
+                debugger
+
+                const oData = models.getODataModel()
+
+                oData.then((oModel) => {
+                    oModel.read(`/Orders(${id})`, {
+                        success: (aOrder) => {
+                            const oModel = new JSONModel(aOrder)
+                            this.getView().setModel(oModel, "specificOrder")
+                            this.onPressNavToDetail()
                         },
                         error: (sError) => {
                             console.log(sError)
@@ -47,6 +68,10 @@ sap.ui.define([
                 const oBinding = oList.getBinding("items")
                 oBinding.filter(aFilters)
 
+            },
+          
+            onPressNavToDetail: function () {
+                this.byId('splitApp').to(this.createId('details'))
             }
         });
     });

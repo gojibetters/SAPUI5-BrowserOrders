@@ -1,64 +1,110 @@
-<mvc:View 
-    controllerName="com.lab2dev.browserorders.controller.Orders"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:f="sap.f"
-    displayBlock="true"
-    >
-    <SplitApp id="splitApp" initialMaster="page">
-        <masterPages>
-            <Page id="orders" title="Orders ({/Orders/length})">
-                <content>
-                
-                    <SearchField liveChange=".onSearch" width="auto" class="sapUiSmallMarginBeginEnd sapUiMediumMarginTop" />
+<mvc:View
+	controllerName="com.lab2dev.browserorders.controller.Orders"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	displayBlock="true"
+>
+	<SplitApp id="splitApp" initialMaster="page" initialDetail="emptyDetails">
+		<masterPages>
+			<Page id="orders" title="Orders ({orders>/length})">
+				<content>
 
-                    <List id="ordersList" items="{/Orders}" class="sapUiTinyMarginTop sapUiSmallMarginBeginEnd" width="auto">
-                        <ObjectListItem
-                            title="Order {OrderID}"
-                            highlightText=""
-                            type="Active"
-                            number="{
+					<SearchField liveChange=".onSearch" width="auto"
+						class="sapUiSmallMarginBeginEnd sapUiMediumMarginTop" />
+
+					<List id="ordersList" items="{orders>/}"
+						class="sapUiTinyMarginTop sapUiSmallMarginBeginEnd" width="auto">
+						<ObjectListItem
+							title="Order {orders>OrderID}"
+							press="onListItemPress"
+							type="Active"
+							number="{
                             parts:[{
-                                path:'OrderDate',
+                                path:'orders>OrderDate',
                                 formatter: '.formatter.formattedOrderDate'
                                 }],
                             type: 'sap.ui.model.type.Date'
                             }"
-                            numberUnit="{CurrencyCode}"
-                            >
-                            <firstStatus>
-                                <ObjectStatus
-                                    text="{
-                                        parts: ['ShippedDate', 'OrderDate'],
+							numberUnit="{CurrencyCode}"
+						>
+							<firstStatus>
+								<ObjectStatus
+									text="{
+                                        parts: ['orders>ShippedDate', 'orders>OrderDate'],
                                         formatter: '.formatter.textStatus'
                                     }"
-                                    state="{
-                                        parts: ['ShippedDate', 'OrderDate'],
+									state="{
+                                        parts: ['orders>ShippedDate', 'orders>OrderDate'],
                                         formatter: '.formatter.textStatusColor'
                                     }" />
-                            </firstStatus>
-                            <ObjectAttribute text="{ShipName}" />
-                            <ObjectAttribute text="Shipped: {
-                                path: 'ShippedDate',
+							</firstStatus>
+							<ObjectAttribute text="{orders>ShipName}" />
+							<ObjectAttribute
+								text="Shipped: {
+                                path: 'orders>ShippedDate',
                                 formatter: '.formatter.formattedShippedDate'
                                 }" />
-                        </ObjectListItem>
-                    </List>
-                </content>
-            </Page>
-        </masterPages>
+						</ObjectListItem>
+					</List>
+				</content>
+			</Page>
+		</masterPages>
 
-        <detailPages>
-            <f:DynamicPage id="details">
-                <f:title>
-                    <f:DynamicPageTitle >
-                        <f:heading>
-                            <Title text="Order 47283"/>
-                        </f:heading>
-                    </f:DynamicPageTitle>
-                </f:title>
-                
-            </f:DynamicPage>
-        </detailPages>
-    </SplitApp>
+		<detailPages>
+			<Page id="emptyDetails">
+				<Text class="sapUiMediumMargin" text="Select any order to see their details." />
+			</Page>
+
+			<f:DynamicPage id="details">
+
+				<!-- DynamicPage Title -->
+				<f:title>
+					<f:DynamicPageTitle>
+						<f:heading>
+							<Title
+								text="Order {specificOrder>/OrderID}" />
+						</f:heading>
+
+						<f:actions>
+							<Button
+								icon="sap-icon://email"
+								type="Transparent"
+								press="some action here"
+							/>
+						</f:actions>
+
+						<f:navigationActions>
+							<Button
+								icon="sap-icon://full-screen"
+								type="Transparent" />
+							<Button
+								icon="sap-icon://decline"
+								type="Transparent" />
+						</f:navigationActions>
+					</f:DynamicPageTitle>
+				</f:title>
+
+				<!-- DynamicPage Header -->
+				<f:header>
+					<f:DynamicPageHeader pinnable="true">
+						<layout:HorizontalLayout allowWrapping="true">
+							<layout:VerticalLayout class="sapUiMediumMarginEnd">
+								<ObjectAttribute title="Customer" text="Warehouse A" />
+								<ObjectAttribute title="Ordered" text="23L" />
+								<ObjectAttribute title="Shipped" text="34" />
+							</layout:VerticalLayout>
+
+							<layout:VerticalLayout>
+								<ObjectAttribute title="Price" />
+								<ObjectAttribute text="4396 EUR" />
+							</layout:VerticalLayout>
+						</layout:HorizontalLayout>
+					</f:DynamicPageHeader>
+				</f:header>
+
+			</f:DynamicPage>
+		</detailPages>
+	</SplitApp>
 </mvc:View>
