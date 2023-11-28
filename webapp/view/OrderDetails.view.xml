@@ -149,6 +149,8 @@
                           path: 'specificOrder>/Employee/Photo/',
                           formatter: '.formatter.mountImage'
                         }"
+                        width="114px"
+                        height="114px"
                       />
                     </f:fields>
                   </f:FormElement>
