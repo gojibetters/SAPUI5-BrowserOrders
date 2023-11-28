@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator",
+    "sap/ui/model/FilterOperator",
     "com/lab2dev/browserorders/model/models",
     "../model/formatter"
 ],
@@ -16,7 +16,7 @@ sap.ui.define([
             formatter: formatter,
 
             onInit: function () {
-                const oData = models.getODataModel()    
+                const oData = models.getODataModel()
 
                 oData.then((oModel) => {
                     oModel.read("/Orders", {
@@ -39,8 +39,15 @@ sap.ui.define([
 
                 oData.then((oModel) => {
                     oModel.read(`/Orders(${id})`, {
+                        urlParameters: {
+                            "$expand": "Order_Details/Product"
+                        },
                         success: (aOrder) => {
-                            const oModel = new JSONModel(aOrder)
+                            const oModel = new JSONModel({
+                                ...aOrder,
+                                Order_Details: aOrder.Order_Details.results
+                            })
+
                             this.getView().setModel(oModel, "specificOrder")
                             this.onPressNavToDetail()
                         },
@@ -66,7 +73,7 @@ sap.ui.define([
                 oBinding.filter(aFilters)
 
             },
-          
+
             onPressNavToDetail: function () {
                 this.byId('splitApp').to(this.createId('details'))
             }

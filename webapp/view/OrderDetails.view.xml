@@ -1,0 +1,73 @@
+<mvc:View
+  controllerName="com.lab2dev.browserorders.controller.Orders"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+>
+
+
+  <Table
+    id="specificOrderTable"
+    width="auto"
+    items="{
+      path : 'specificOrder>/Order_Details'
+    }"
+  >
+    <headerToolbar>
+      <Toolbar>
+        <Title text="Line Items ({specificOrder>/Order_Details/length})" level="H2" />
+      </Toolbar>
+    </headerToolbar>
+
+    <columns>
+      <Column>
+        <Text text="Product" />
+      </Column>
+
+      <Column hAlign="End">
+        <Text text="Unit Price" />
+      </Column>
+
+      <Column hAlign="End">
+        <Text text="Quantity" />
+      </Column>
+
+      <Column hAlign="End">
+        <Text text="Total" />
+      </Column>
+    </columns>
+
+    <items>
+      <ColumnListItem>
+        <cells>
+          <ObjectIdentifier
+            title="{specificOrder>Product/ProductName}"
+            text="{specificOrder>Product/ProductID}" />
+
+          <ObjectNumber
+            number="{
+								parts:[{
+                  path:'specificOrder>UnitPrice',
+                  formatter: '.formatter.formatAmount'
+                }],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {showMeasure: false}
+							}"
+            unit="EUR" />
+
+          <ObjectIdentifier text="{specificOrder>Quantity}" />
+
+          <ObjectNumber
+            number="{
+              parts:['specificOrder>UnitPrice','specificOrder>Quantity'],
+              formatter: '.formatter.multiplyAndFormatTotalQuantity',
+              type: 'sap.ui.model.type.Currency',
+              formatOptions: {showMeasure: false}
+            }"
+            unit="EUR" />
+        </cells>
+      </ColumnListItem>
+    </items>
+
+  </Table>
+
+</mvc:View>

@@ -106,11 +106,15 @@
 
 							<layout:VerticalLayout>
 								<ObjectAttribute title="Price" />
-								<ObjectAttribute text="4396 EUR" />
+								<ObjectAttribute text="null EUR" />
 							</layout:VerticalLayout>
 						</layout:HorizontalLayout>
 					</f:DynamicPageHeader>
 				</f:header>
+
+				<f:content>
+					<mvc:XMLView viewName="com.lab2dev.browserorders.view.OrderDetails" />
+				</f:content>
 
 			</f:DynamicPage>
 		</detailPages>
