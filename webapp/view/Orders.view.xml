@@ -106,7 +106,14 @@
 
 							<layout:VerticalLayout>
 								<ObjectAttribute title="Price" />
-								<ObjectAttribute text="null EUR" />
+								<ObjectNumber
+									number="{
+									parts:['specificOrder>/TotalPrice'],
+									type: 'sap.ui.model.type.Currency',
+                  formatOptions: {showMeasure: false}
+								}"
+									unit="EUR"
+								/>
 							</layout:VerticalLayout>
 						</layout:HorizontalLayout>
 					</f:DynamicPageHeader>

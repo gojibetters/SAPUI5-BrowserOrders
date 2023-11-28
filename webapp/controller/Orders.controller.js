@@ -43,9 +43,14 @@ sap.ui.define([
                             "$expand": "Order_Details/Product,Employee"
                         },
                         success: (aOrder) => {
+                            const TotalPrice = aOrder.Order_Details.results.reduce((acc, e) => {
+                                return acc + (e.UnitPrice * e.Quantity)
+                            }, 0).toFixed(2)
+
                             const oModel = new JSONModel({
                                 ...aOrder,
-                                Order_Details: aOrder.Order_Details.results
+                                Order_Details: aOrder.Order_Details.results,
+                                TotalPrice
                             })
 
                             this.getView().setModel(oModel, "specificOrder")
