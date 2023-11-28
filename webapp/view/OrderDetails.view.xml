@@ -2,72 +2,235 @@
   controllerName="com.lab2dev.browserorders.controller.Orders"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core"
 >
 
-
-  <Table
-    id="specificOrderTable"
-    width="auto"
-    items="{
-      path : 'specificOrder>/Order_Details'
-    }"
-  >
-    <headerToolbar>
-      <Toolbar>
-        <Title text="Line Items ({specificOrder>/Order_Details/length})" level="H2" />
-      </Toolbar>
-    </headerToolbar>
-
-    <columns>
-      <Column>
-        <Text text="Product" />
-      </Column>
-
-      <Column hAlign="End">
-        <Text text="Unit Price" />
-      </Column>
-
-      <Column hAlign="End">
-        <Text text="Quantity" />
-      </Column>
-
-      <Column hAlign="End">
-        <Text text="Total" />
-      </Column>
-    </columns>
-
+  <IconTabBar headerBackgroundDesign="Transparent">
     <items>
-      <ColumnListItem>
-        <cells>
-          <ObjectIdentifier
-            title="{specificOrder>Product/ProductName}"
-            text="{specificOrder>Product/ProductID}" />
+      <IconTabFilter
+        key="shipping"
+        icon="sap-icon://shipping-status"
+      >
+        <VBox>
+          <f:Form>
+            <f:title>
+              <core:Title text="Shipping Address" />
+            </f:title>
 
-          <ObjectNumber
-            number="{
-								parts:[{
-                  path:'specificOrder>UnitPrice',
-                  formatter: '.formatter.formatAmount'
-                }],
-								type: 'sap.ui.model.type.Currency',
-								formatOptions: {showMeasure: false}
-							}"
-            unit="EUR" />
+            <f:layout>
+              <f:ResponsiveGridLayout
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="4"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="1"
+                emptySpanL="1"
+                emptySpanM="1"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false" />
+            </f:layout>
 
-          <ObjectIdentifier text="{specificOrder>Quantity}" />
+            <f:formContainers>
+              <f:FormContainer>
+                <f:formElements>
 
-          <ObjectNumber
-            number="{
-              parts:['specificOrder>UnitPrice','specificOrder>Quantity'],
-              formatter: '.formatter.multiplyAndFormatTotalQuantity',
-              type: 'sap.ui.model.type.Currency',
-              formatOptions: {showMeasure: false}
-            }"
-            unit="EUR" />
-        </cells>
-      </ColumnListItem>
+                  <f:FormElement label="Name">
+                    <f:fields>
+                      <Text text="{specificOrder>/ShipName}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="Street">
+                    <f:fields>
+                      <Text text="{specificOrder>/ShipAddress}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="ZIP Code / City">
+                    <f:fields>
+                      <Text
+                        text="{specificOrder>/ShipPostalCode} {specificOrder>/ShipCity}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="Region">
+                    <f:fields>
+                      <Text
+                        text="{= ${specificOrder>/ShipRegion} ? ${specificOrder>/ShipRegion} : '-'}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="Country">
+                    <f:fields>
+                      <Text text="{specificOrder>/ShipCountry}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                </f:formElements>
+              </f:FormContainer>
+            </f:formContainers>
+          </f:Form>
+        </VBox>
+      </IconTabFilter>
+
+      <IconTabFilter
+        key=" employee"
+        icon=" sap-icon://employee"
+      >
+        <VBox class="sapUiSmallMargin">
+          <f:Form>
+            <f:title>
+              <core:Title text="Shipping Address" />
+            </f:title>
+
+            <f:layout>
+              <f:ResponsiveGridLayout
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false" />
+            </f:layout>
+
+            <f:formContainers>
+              <f:FormContainer title="Details">
+                <f:formElements>
+
+                  <f:FormElement label="Name">
+                    <f:fields>
+                      <Text
+                        text="{specificOrder>/Employee/FirstName} {specificOrder>/Employee/LastName}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="Employee ID">
+                    <f:fields>
+                      <Text text="{specificOrder>/Employee/EmployeeID}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="Job Title">
+                    <f:fields>
+                      <Text
+                        text="{specificOrder>/Employee/Title}" />
+                    </f:fields>
+                  </f:FormElement>
+
+                  <f:FormElement label="Phone">
+                    <f:fields>
+                      <Text
+                        text="{specificOrder>/Employee/HomePhone}" />
+                    </f:fields>
+                  </f:FormElement>
+                </f:formElements>
+
+              </f:FormContainer>
+
+              <f:FormContainer title="Picture">
+                <f:formElements>
+                  <f:FormElement>
+                    <f:fields>
+                      <Image
+                        src="{
+                          path: 'specificOrder>/Employee/Photo/',
+                          formatter: '.formatter.mountImage'
+                        }"
+                      />
+                    </f:fields>
+                  </f:FormElement>
+                </f:formElements>
+              </f:FormContainer>
+            </f:formContainers>
+          </f:Form>
+        </VBox>
+      </IconTabFilter>
+
+      <IconTabFilter
+        key=" products"
+        icon=" sap-icon://product"
+        count=" {specificOrder>/Order_Details/length}"
+      >
+        <Table
+          id="specificOrderTable"
+          width="auto"
+          items="{
+          path : 'specificOrder>/Order_Details'
+        }"
+        >
+          <headerToolbar>
+            <Toolbar>
+              <Title text="Line Items ({specificOrder>/Order_Details/length})" level="H2" />
+            </Toolbar>
+          </headerToolbar>
+
+          <columns>
+            <Column>
+              <Text text="Product" />
+            </Column>
+
+            <Column hAlign="End">
+              <Text text="Unit Price" />
+            </Column>
+
+            <Column hAlign="End">
+              <Text text="Quantity" />
+            </Column>
+
+            <Column hAlign="End">
+              <Text text="Total" />
+            </Column>
+          </columns>
+
+          <items>
+            <ColumnListItem>
+              <cells>
+                <ObjectIdentifier
+                  title="{specificOrder>Product/ProductName}"
+                  text="{specificOrder>Product/ProductID}" />
+
+                <ObjectNumber
+                  number="{
+                    parts:[{
+                      path:'specificOrder>UnitPrice',
+                      formatter: '.formatter.formatAmount'
+                    }],
+                    type: 'sap.ui.model.type.Currency',
+                    formatOptions: {showMeasure: false}
+                  }"
+                  unit="EUR" />
+
+                <ObjectIdentifier text="{specificOrder>Quantity}" />
+
+                <ObjectNumber
+                  number="{
+                  parts:['specificOrder>UnitPrice','specificOrder>Quantity'],
+                  formatter: '.formatter.multiplyAndFormatTotalQuantity',
+                  type: 'sap.ui.model.type.Currency',
+                  formatOptions: {showMeasure: false}
+                }"
+                  unit="EUR" />
+              </cells>
+            </ColumnListItem>
+          </items>
+
+        </Table>
+      </IconTabFilter>
     </items>
+  </IconTabBar>
 
-  </Table>
 
 </mvc:View>

@@ -40,7 +40,7 @@ sap.ui.define([
                 oData.then((oModel) => {
                     oModel.read(`/Orders(${id})`, {
                         urlParameters: {
-                            "$expand": "Order_Details/Product"
+                            "$expand": "Order_Details/Product,Employee"
                         },
                         success: (aOrder) => {
                             const oModel = new JSONModel({

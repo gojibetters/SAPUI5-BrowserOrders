@@ -70,9 +70,15 @@ sap.ui.define([], () => {
 
 		multiplyAndFormatTotalQuantity(unitPrice, Quantity) {
 			const multipliedValue = _multiplyTotalQuantity(unitPrice, Quantity)
-			console.log('multipliedValue', multipliedValue)
-			console.log(_formatAmount(multipliedValue))
 			return _formatAmount(multipliedValue)
 		},
+
+		mountImage(base64) {
+			if (!!base64) {
+				return `data:image/jpeg;base64,${base64.substring(104)}`
+			}
+
+			return ''
+		}
 	};
 });
