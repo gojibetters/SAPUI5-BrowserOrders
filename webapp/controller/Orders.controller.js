@@ -43,9 +43,9 @@ sap.ui.define([
                             "$expand": "Order_Details/Product,Employee"
                         },
                         success: (aOrder) => {
-                            const TotalPrice = aOrder.Order_Details.results.reduce((acc, e) => {
-                                return acc + (e.UnitPrice * e.Quantity)
-                            }, 0).toFixed(2)
+                            const TotalPrice = aOrder.Order_Details.results.reduce(
+                                (acc, e) => acc + (e.UnitPrice * e.Quantity), 0)
+                                .toFixed(2)
 
                             const oModel = new JSONModel({
                                 ...aOrder,
@@ -64,19 +64,21 @@ sap.ui.define([
             },
 
             onSearch: function (oEvent) {
-                let aFilters = []
                 let sQuery = oEvent.getSource().getValue()
 
-                if (sQuery && sQuery.length > 0) {
-                    let filter = new Filter("ShipName", FilterOperator.Contains, sQuery)
+                const itemsFromOrdersList = this.byId("ordersList").getBinding("items")
 
-                    aFilters.push(filter)
-                }
+                if (!sQuery) return itemsFromOrdersList.filter([])
 
-                const oList = this.byId("ordersList")
-                const oBinding = oList.getBinding("items")
-                oBinding.filter(aFilters)
-
+                itemsFromOrdersList.filter(
+                    new Filter({
+                        filters: [
+                            new Filter("OrderID", FilterOperator.EQ, Number(sQuery)),
+                            new Filter("ShipName", FilterOperator.Contains, sQuery)
+                        ],
+                        and: false
+                    })
+                )
             },
 
             onPressNavToDetail: function () {

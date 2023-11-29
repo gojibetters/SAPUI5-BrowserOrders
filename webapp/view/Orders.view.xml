@@ -11,7 +11,7 @@
 			<Page id="orders" title="Orders ({orders>/length})">
 				<content>
 
-					<SearchField liveChange=".onSearch" width="auto"
+					<SearchField search=".onSearch" width="auto"
 						class="sapUiSmallMarginBeginEnd sapUiMediumMarginTop" />
 
 					<List id="ordersList" items="{orders>/}"

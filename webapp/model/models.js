@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device",
     "sap/ui/model/odata/v2/ODataModel"
-], 
+],
     /**
      * provide app-view type models (as in the first "V" in MVVC)
      * 
@@ -34,5 +34,5 @@ sap.ui.define([
                     })
                 })
             }
-    };
-});
+        };
+    });
