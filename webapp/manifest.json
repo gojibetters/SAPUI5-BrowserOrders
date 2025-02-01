@@ -17,10 +17,10 @@
     "dataSources": {},
     "i18n": {
       "bundleUrl": "i18n/i18n.properties",
-      "fallbackLocale": "",
       "supportedLocales": [
         ""
-      ]
+      ],
+      "fallbackLocale": ""
     }
   },
   "sap.ui": {
@@ -62,17 +62,12 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
           "bundleName": "com.lab2dev.browserorders.i18n.i18n",
-          "fallbackLocale": "",
           "supportedLocales": [
             ""
-          ]
-        }
-      },
-      "": {
-        "dataSource": "",
-        "preload": true,
-        "settings": {},
-        "type": ""
+          ],
+          "fallbackLocale": ""
+        },
+        "preload": true
       }
     },
     "resources": {
