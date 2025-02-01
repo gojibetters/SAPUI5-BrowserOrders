@@ -1,7 +1,7 @@
 sap.ui.define([
 	"sap/base/util/ObjectPath",
 	"sap/ushell/services/Container"
-], function (ObjectPath) {
+], function (ObjectPath, Container) {
 	"use strict";
 
 	// define ushell config
@@ -88,7 +88,7 @@ sap.ui.define([
 			if (!this._oBootstrapFinished) {
 				this._oBootstrapFinished = sap.ushell.bootstrap("local");
 				this._oBootstrapFinished.then(function () {
-					sap.ushell.Container.createRenderer().placeAt("content");
+					Container.createRenderer().placeAt("content");
 				});
 			}
 

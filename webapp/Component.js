@@ -12,6 +12,7 @@ sap.ui.define([
 
         return UIComponent.extend("com.lab2dev.browserorders.Component", {
             metadata: {
+                interfaces: ["sap.ui.core.IAsyncContentCreation"],
                 manifest: "json"
             },
 

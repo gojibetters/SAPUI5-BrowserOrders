@@ -1,5 +1,5 @@
 <mvc:View
-  controllerName="com.lab2dev.browserorders.controller.Orders"
+  controllerName="com.lab2dev.browserorders.controller.OrdersDetails"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   xmlns:l="sap.ui.layout"
