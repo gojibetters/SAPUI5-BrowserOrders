@@ -3,10 +3,11 @@
  */
 
 sap.ui.define([
-        "sap/ui/core/UIComponent",
-        "com/lab2dev/browserorders/model/models",
-    ],
-    function (UIComponent, models) {
+    "sap/ui/core/UIComponent",
+    "sap/ui/Device",
+    "com/lab2dev/browserorders/model/models"
+],
+    function (UIComponent, Device, models) {
         "use strict";
 
         return UIComponent.extend("com.lab2dev.browserorders.Component", {

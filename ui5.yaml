@@ -28,4 +28,4 @@ server:
       afterMiddleware: fiori-tools-appreload
       configuration:
         component: com.lab2dev.browserorders
-        ui5Theme: sap_horizon
+        ui5Theme: sap_horizon_dark
